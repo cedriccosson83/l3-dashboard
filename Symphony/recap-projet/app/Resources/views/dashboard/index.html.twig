@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1> DASH BOARD </h1>
+
+<h2  class="mtop"> FICHES </h2>
+<div class="col-md-12">
+<table class="table">
+        <thed class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Projectname</th>
+                <th scope="col">Createdby</th>
+                <th scope="col">Fichedate</th>
+                <th scope="col">Nbdaydone</th>
+                <th scope="col">Nbdaysold</th>
+                <th scope="col">Progression</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiche in fiches %}
+            <tr>
+                <td scope="row"><a href="{{ path('fiche_show', { 'id': fiche.id }) }}">{{ fiche.id }}</a></td>
+                <td>{{ fiche.projet }}</td>
+                <td>{{ fiche.manager }}</td>
+                <td>{% if fiche.ficheDate %}{{ fiche.ficheDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ fiche.nbDayDone }}</td>
+                <td>{{ fiche.nbDaySold }}</td>
+                <td>{{ fiche.progression }}</td>
+                <td>{{ fiche.comment }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('fiche_show', { 'id': fiche.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fiche_edit', { 'id': fiche.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fiche_new') }}">Create a new fiche</a>
+        </li>
+    </ul>
+</div>
+<hr />
+<h2 class="mtop"> MANAGERS </h2>
+<div class="col-md-12">
+<table class="table table-dark">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">Title</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for manager in managers %}
+            <tr>
+                <td scope="row"><a href="{{ path('manager_show', { 'id': manager.id }) }}">{{ manager.id }}</a></td>
+                <td>{{ manager.firstName }}</td>
+                <td>{{ manager.lastName }}</td>
+                <td>{{ manager.title }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('manager_show', { 'id': manager.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('manager_edit', { 'id': manager.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('manager_new') }}">Create a new manager</a>
+        </li>
+    </ul>
+</div>
+<hr />
+<h2 class="mtop"> PROJECTS </h2>
+<div class="col-md-12">
+<table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Projectname</th>
+                <th scope="col">Datebegin</th>
+                <th scope="col">Dateend</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+            <tr>
+                <td scope="row"><a href="{{ path('projet_show', { 'id': projet.id }) }}">{{ projet.id }}</a></td>
+                <td>{{ projet.projectName }}</td>
+                <td>{% if projet.dateBegin %}{{ projet.dateBegin|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if projet.dateEnd %}{{ projet.dateEnd|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('projet_show', { 'id': projet.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('projet_edit', { 'id': projet.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('projet_new') }}">Create a new projet</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
